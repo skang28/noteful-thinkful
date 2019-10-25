@@ -8,6 +8,8 @@ import NotePageMain from '../NotePageMain/NotePageMain';
 import './App.css';
 import config from '../config'
 import NotesContext from '../NotesContext'
+import AddFolder from '../AddFolder/AddFolder'
+import AddNote from '../AddNote/AddNote'
 
 class App extends Component {
     state = {
@@ -42,6 +44,14 @@ class App extends Component {
         })
     }
 
+    addF(newFolder) {
+        console.log(newFolder)
+    }
+
+    addNotes(newNote) {
+        console.log(newNote)
+    }
+
     renderNavRoutes() {
         return (
             <>
@@ -74,6 +84,16 @@ class App extends Component {
                 <Route
                     path="/note/:noteId"
                     component={NotePageMain}
+                />
+                <Route 
+                    path="/add-folder"
+                    component={AddFolder}
+                    render={(props) => <AddFolder addF={this.addF} />}
+                />
+                <Route
+                    path="/add-note"
+                    component={AddNote}
+                    render={(props) => <AddNote addNote={this.addNote} />}
                 />
             </>
         );
