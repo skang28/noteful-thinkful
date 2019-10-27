@@ -44,7 +44,7 @@ class App extends Component {
         })
     }
 
-    addF(newFolder) {
+    addFolder(newFolder) {
         // let newFolders = this.state.folders 
         //newFolders.push(newFolder)
         //this.setState({folders: newFolder})
@@ -60,6 +60,8 @@ class App extends Component {
             })
             .then(
                 newFolders.push(newFolder)
+            )
+            .then(
                 this.setState({folders: newFolder})
             )
             .catch((error) => console.log(error))
@@ -104,7 +106,7 @@ class App extends Component {
                 />
                 <Route 
                     path="/add-folder"
-                    render={(props) => <AddFolder addF={this.addF} />}
+                    render={(props) => <AddFolder addFolder={this.addFolder} />}
                 />
                 <Route
                     path="/add-note/:folderId"

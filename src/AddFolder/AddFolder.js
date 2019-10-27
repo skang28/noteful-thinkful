@@ -7,7 +7,7 @@ export default class AddFolder extends React.Component {
                 <form className="addFolderform" 
                     onSubmit={(event) => {
                         event.preventDefault();
-                        this.props.addF({
+                        this.props.addFolder({
                             name: event.target.folderName.value
                         })
                     }}>
