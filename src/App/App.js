@@ -45,10 +45,27 @@ class App extends Component {
     }
 
     addF(newFolder) {
-        console.log(newFolder)
+        // let newFolders = this.state.folders 
+        //newFolders.push(newFolder)
+        //this.setState({folders: newFolder})
+        let newFolders = this.state.folders
+        fetch(`${config.API_ENDPOINT}/notes`, {
+            method: 'POST'
+        })
+            .then(res => {
+                if(!res.ok) {
+                    throw new Error(res.status)
+                }
+                return res.json()
+            })
+            .then(
+                newFolders.push(newFolder)
+                this.setState({folders: newFolder})
+            )
+            .catch((error) => console.log(error))
     }
 
-    addNotes(newNote) {
+    addNote(newNote) {
         console.log(newNote)
     }
 
@@ -87,13 +104,11 @@ class App extends Component {
                 />
                 <Route 
                     path="/add-folder"
-                    component={AddFolder}
                     render={(props) => <AddFolder addF={this.addF} />}
                 />
                 <Route
-                    path="/add-note"
-                    component={AddNote}
-                    render={(props) => <AddNote addNote={this.addNote} />}
+                    path="/add-note/:folderId"
+                    render={(props) => <AddNote addNote={this.addNote} folderId={props.match.params.folderId}/>}
                 />
             </>
         );
