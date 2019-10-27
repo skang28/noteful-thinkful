@@ -44,12 +44,17 @@ class App extends Component {
         })
     }
 
+    changeStateFolder = folder => {
+        let newFolders = this.state.folders
+        newFolders.push(folder)
+        this.setState({folders: newFolders})
+    }
+
     addFolder(newFolder) {
         // let newFolders = this.state.folders 
         //newFolders.push(newFolder)
         //this.setState({folders: newFolder})
-        let newFolders = this.state.folders
-        fetch(`${config.API_ENDPOINT}/notes`, {
+        fetch(`${config.API_ENDPOINT}/folders`, {
             method: 'POST'
         })
             .then(res => {
@@ -59,10 +64,7 @@ class App extends Component {
                 return res.json()
             })
             .then(
-                newFolders.push(newFolder)
-            )
-            .then(
-                this.setState({folders: newFolder})
+                this.changeStateFolder(newFolder)
             )
             .catch((error) => console.log(error))
     }
