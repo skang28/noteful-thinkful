@@ -44,16 +44,11 @@ class App extends Component {
         })
     }
 
-    changeStateFolder = folder => {
-        let newFolders = this.state.folders
-        newFolders.push(folder)
-        this.setState({folders: newFolders})
-    }
-
-    addFolder(newFolder) {
+    addFolder = (newFolder) => {
         // let newFolders = this.state.folders 
         //newFolders.push(newFolder)
         //this.setState({folders: newFolder})
+        let newFolders = this.state.folders
         fetch(`${config.API_ENDPOINT}/folders`, {
             method: 'POST'
         })
@@ -64,13 +59,28 @@ class App extends Component {
                 return res.json()
             })
             .then(
-                this.changeStateFolder(newFolder)
+                newFolders.push(newFolder),
+                this.setState({folders: newFolders})
             )
             .catch((error) => console.log(error))
     }
 
-    addNote(newNote) {
-        console.log(newNote)
+    addNote = (newNote) => {
+        let newNotes = this.state.notes
+        fetch(`${config.API_ENDPOINT}/notes`, {
+            method: 'POST'
+        })
+        .then(res => {
+            if(!res.ok) {
+                throw new Error(res.status)
+            }
+            return res.json()
+        })
+        .then(
+            newNotes.push(newNote),
+            this.setState({notes: newNotes})
+        )
+        .catch((error) => console.log(error))
     }
 
     renderNavRoutes() {
