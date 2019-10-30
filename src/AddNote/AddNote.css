@@ -1,0 +1,36 @@
+.addNoteName-label {
+    color: #b5b3b3;
+    font-weight: bold;
+}
+
+.addNoteHere-label {
+    color: #b5b3b3;
+    font-weight: bold;
+}
+
+label {
+    margin-bottom: 0.25em;
+}
+
+.addNoteName-input {
+    margin-right: 1em;
+    width: 30%;
+    margin-bottom: 2em;
+}
+
+.addNote-textarea {
+    margin-right: 1em;
+    width: 30%;
+    margin-bottom: 2em;
+}
+
+.addNoteButton {
+    width: 30%;
+    padding: 1em;
+    font-weight: bold;
+}
+
+.addNoteForm {
+    display: flex;
+    flex-direction: column;
+}

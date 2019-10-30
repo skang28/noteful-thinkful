@@ -10,6 +10,10 @@ import config from '../config'
 import NotesContext from '../NotesContext'
 import AddFolder from '../AddFolder/AddFolder'
 import AddNote from '../AddNote/AddNote'
+import AddFolderError from '../AddFolder/AddFolderError'
+import AddNoteError from '../AddNote/AddNoteError'
+import NoteListMainError from '../NoteListMain/NoteListMainError'
+import NoteListNavError from '../NoteListNav/NoteListNavError'
 
 class App extends Component {
     state = {
@@ -50,7 +54,11 @@ class App extends Component {
         //this.setState({folders: newFolder})
         let newFolders = this.state.folders
         fetch(`${config.API_ENDPOINT}/folders`, {
-            method: 'POST'
+            method: 'POST',
+            body: JSON.stringify(newFolder),
+            headers:{
+                'Content-Type': 'application/json'
+            }
         })
             .then(res => {
                 if(!res.ok) {
@@ -58,9 +66,10 @@ class App extends Component {
                 }
                 return res.json()
             })
-            .then(
-                newFolders.push(newFolder),
+            .then( (newFolderResponse) => {
+                newFolders.push(newFolderResponse)
                 this.setState({folders: newFolders})
+                }
             )
             .catch((error) => console.log(error))
     }
@@ -68,7 +77,11 @@ class App extends Component {
     addNote = (newNote) => {
         let newNotes = this.state.notes
         fetch(`${config.API_ENDPOINT}/notes`, {
-            method: 'POST'
+            method: 'POST',
+            body: JSON.stringify(newNote),
+            headers:{
+                'Content-Type': 'application/json'
+            }
         })
         .then(res => {
             if(!res.ok) {
@@ -76,9 +89,10 @@ class App extends Component {
             }
             return res.json()
         })
-        .then(
-            newNotes.push(newNote),
+        .then( (newNoteResponse) => {
+            newNotes.push(newNoteResponse)
             this.setState({notes: newNotes})
+            }
         )
         .catch((error) => console.log(error))
     }
@@ -87,12 +101,14 @@ class App extends Component {
         return (
             <>
                 {['/', '/folder/:folderId'].map(path => (
-                    <Route
-                        exact
-                        key={path}
-                        path={path}
-                        component={NoteListNav}
-                    />
+                    <NoteListNavError>
+                        <Route
+                            exact
+                            key={path}
+                            path={path}
+                            component={NoteListNav}
+                        />
+                    </NoteListNavError>
                 ))}
                 <Route path="/note/:noteId" component={NotePageNav}/>
                 <Route path="/add-folder" component={NotePageNav} />
@@ -105,25 +121,31 @@ class App extends Component {
         return (
             <>
                 {['/', '/folder/:folderId'].map(path => (
-                    <Route
-                        exact
-                        key={path}
-                        path={path}
-                        component={NoteListMain}
-                    />
+                    <NoteListMainError>
+                        <Route
+                            exact
+                            key={path}
+                            path={path}
+                            component={NoteListMain}
+                        />
+                    </NoteListMainError>
                 ))}
-                <Route
-                    path="/note/:noteId"
-                    component={NotePageMain}
-                />
-                <Route 
-                    path="/add-folder"
-                    render={(props) => <AddFolder addFolder={this.addFolder} />}
-                />
-                <Route
-                    path="/add-note/:folderId"
-                    render={(props) => <AddNote addNote={this.addNote} folderId={props.match.params.folderId}/>}
-                />
+                    <Route
+                        path="/note/:noteId"
+                        component={NotePageMain}
+                    />
+                 <AddFolderError>
+                    <Route 
+                        path="/add-folder"
+                        render={(props) => <AddFolder addFolder={this.addFolder} />}
+                    />
+                </AddFolderError>
+                <AddNoteError>
+                    <Route
+                        path="/add-note/:folderId"
+                        render={(props) => <AddNote addNote={this.addNote} folderId={props.match.params.folderId}/>}
+                    />
+                </AddNoteError>
             </>
         );
     }

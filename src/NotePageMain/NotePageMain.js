@@ -3,6 +3,7 @@ import Note from '../Note/Note'
 import './NotePageMain.css'
 import NotesContext from '../NotesContext'
 import {findNote} from '../notes-helpers'
+import PropTypes from 'prop-types'
 
 export default class NotePageMain extends React.Component {
   static defaultProps = {
@@ -32,9 +33,13 @@ export default class NotePageMain extends React.Component {
         <div className='NotePageMain__content'>
           {note.content.split(/\n \r|\n/).map((para, i) =>
             <p key={i}>{para}</p>
-          )}
+          )}                     
         </div>
       </section>
     )
   }
+}
+
+NotePageMain.propTypes = {
+  match: PropTypes.array
 }

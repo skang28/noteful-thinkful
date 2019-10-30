@@ -6,6 +6,7 @@ import CircleButton from '../CircleButton/CircleButton'
 import './NoteListMain.css'
 import NotesContext from '../NotesContext'
 import {getNotesForFolder} from '../notes-helpers'
+import PropTypes from 'prop-types'
 
 export default class NoteListMain extends React.Component {
   static contextType = NotesContext
@@ -50,4 +51,8 @@ export default class NoteListMain extends React.Component {
       </section>
     )
   }
+}
+
+NoteListMain.propTypes = {
+  match: PropTypes.array
 }

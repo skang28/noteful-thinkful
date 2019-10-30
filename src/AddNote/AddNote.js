@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import './AddNote.css'
 
 export default class AddNote extends React.Component {
     render() {
@@ -11,16 +13,21 @@ export default class AddNote extends React.Component {
                             name: event.target.addNoteName.value,
                             modified: new Date().toISOString(),
                             folderId: this.props.folderId,
-                            content: event.target.newNote.value
+                            content: event.target.newNote.value,
                         })
                     }}>
-                    <label htmlFor="addNoteName">Note Name</label>
-                    <input type="text" name="addNoteName" required/>
-                    <label htmlFor="newNote">Enter Note Here</label>
-                    <textarea name="newNote" />
-                    <button type="submit">Create Note</button>
+                    <label htmlFor="addNoteName" className="addNoteName-label">Note Name</label>
+                    <input type="text" name="addNoteName" className="addNoteName-input" required/>
+                    <label htmlFor="newNote" className="addNoteHere-label">Enter Note Here</label>
+                    <textarea name="newNote" className="addNote-textarea"/>
+                    <button type="submit" className="addNoteButton">Create Note</button>
                 </form>
             </div>
         )
     }
+}
+
+AddNote.propTypes = {
+    folderId: PropTypes.string,
+    addNote: PropTypes.func
 }
