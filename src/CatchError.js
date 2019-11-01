@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class AddNoteError extends React.Component {
+export default class CatchError extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,7 +15,7 @@ export default class AddNoteError extends React.Component {
     render() {
         if (this.state.hasError) {      
           return (
-            <h2>Could not add this note.</h2>
+            <h2>Uh oh. Something's gone wrong!</h2>
           );
         }
         return this.props.children;

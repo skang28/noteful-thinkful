@@ -12,6 +12,7 @@ export default class AddFolder extends React.Component {
                         this.props.addFolder({
                             name: event.target.folderName.value
                         })
+                        this.props.history.push('/')
                     }}>
                     <label htmlFor="folderName" className="addFolderForm-label">Folder Name</label>
                     <input type="text" name="folderName" className="addFolderForm-input" required />

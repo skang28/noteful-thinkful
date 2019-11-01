@@ -15,6 +15,7 @@ export default class AddNote extends React.Component {
                             folderId: this.props.folderId,
                             content: event.target.newNote.value,
                         })
+                        this.props.history.push('/')
                     }}>
                     <label htmlFor="addNoteName" className="addNoteName-label">Note Name</label>
                     <input type="text" name="addNoteName" className="addNoteName-input" required/>

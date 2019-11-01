@@ -10,10 +10,7 @@ import config from '../config'
 import NotesContext from '../NotesContext'
 import AddFolder from '../AddFolder/AddFolder'
 import AddNote from '../AddNote/AddNote'
-import AddFolderError from '../AddFolder/AddFolderError'
-import AddNoteError from '../AddNote/AddNoteError'
-import NoteListMainError from '../NoteListMain/NoteListMainError'
-import NoteListNavError from '../NoteListNav/NoteListNavError'
+import CatchError from '../CatchError'
 
 class App extends Component {
     state = {
@@ -49,9 +46,7 @@ class App extends Component {
     }
 
     addFolder = (newFolder) => {
-        // let newFolders = this.state.folders 
-        //newFolders.push(newFolder)
-        //this.setState({folders: newFolder})
+        //
         let newFolders = this.state.folders
         fetch(`${config.API_ENDPOINT}/folders`, {
             method: 'POST',
@@ -101,14 +96,14 @@ class App extends Component {
         return (
             <>
                 {['/', '/folder/:folderId'].map(path => (
-                    <NoteListNavError>
+                    <CatchError>
                         <Route
                             exact
                             key={path}
                             path={path}
                             component={NoteListNav}
                         />
-                    </NoteListNavError>
+                    </CatchError>
                 ))}
                 <Route path="/note/:noteId" component={NotePageNav}/>
                 <Route path="/add-folder" component={NotePageNav} />
@@ -121,31 +116,31 @@ class App extends Component {
         return (
             <>
                 {['/', '/folder/:folderId'].map(path => (
-                    <NoteListMainError>
+                    <CatchError>
                         <Route
                             exact
                             key={path}
                             path={path}
                             component={NoteListMain}
                         />
-                    </NoteListMainError>
+                    </CatchError>
                 ))}
                     <Route
                         path="/note/:noteId"
                         component={NotePageMain}
                     />
-                 <AddFolderError>
+                 <CatchError>
                     <Route 
                         path="/add-folder"
-                        render={(props) => <AddFolder addFolder={this.addFolder} />}
+                        render={(props) => <AddFolder addFolder={this.addFolder} {...props} />}
                     />
-                </AddFolderError>
-                <AddNoteError>
+                </CatchError>
+                <CatchError>
                     <Route
                         path="/add-note/:folderId"
-                        render={(props) => <AddNote addNote={this.addNote} folderId={props.match.params.folderId}/>}
+                        render={(props) => <AddNote addNote={this.addNote} folderId={props.match.params.folderId} {...props}/>}
                     />
-                </AddNoteError>
+                </CatchError>
             </>
         );
     }
