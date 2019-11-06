@@ -96,7 +96,7 @@ class App extends Component {
         return (
             <>
                 {['/', '/folder/:folderId'].map(path => (
-                    <CatchError>
+                    <CatchError key={'naverror' + path}>
                         <Route
                             exact
                             key={path}
@@ -116,7 +116,7 @@ class App extends Component {
         return (
             <>
                 {['/', '/folder/:folderId'].map(path => (
-                    <CatchError>
+                    <CatchError key={'mainerror' + path}>
                         <Route
                             exact
                             key={path}

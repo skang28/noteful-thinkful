@@ -18,6 +18,10 @@ export default class CatchError extends React.Component {
             <h2>Uh oh. Something's gone wrong!</h2>
           );
         }
-        return this.props.children;
+        return (
+          <div>
+            {this.props.children}
+          </div>
+        )
       } 
 }
