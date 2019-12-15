@@ -20,8 +20,8 @@ class App extends Component {
 
     componentDidMount() {
         Promise.all([
-            fetch(`${config.API_ENDPOINT}/notes`),
-            fetch(`${config.API_ENDPOINT}/folders`)
+            fetch(`${config.API_ENDPOINT}/api/notes`),
+            fetch(`${config.API_ENDPOINT}/api/folders`)
         ])
         .then(([notesRes, foldersRes]) => {
             if(!notesRes.ok)
@@ -48,7 +48,7 @@ class App extends Component {
     addFolder = (newFolder) => {
         //
         let newFolders = this.state.folders
-        fetch(`${config.API_ENDPOINT}/folders`, {
+        fetch(`${config.API_ENDPOINT}/api/folders`, {
             method: 'POST',
             body: JSON.stringify(newFolder),
             headers:{
@@ -71,7 +71,7 @@ class App extends Component {
 
     addNote = (newNote) => {
         let newNotes = this.state.notes
-        fetch(`${config.API_ENDPOINT}/notes`, {
+        fetch(`${config.API_ENDPOINT}/api/notes`, {
             method: 'POST',
             body: JSON.stringify(newNote),
             headers:{
