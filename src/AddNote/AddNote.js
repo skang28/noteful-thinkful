@@ -11,7 +11,7 @@ export default class AddNote extends React.Component {
                         event.preventDefault()
                         this.props.addNote({
                             name: event.target.addNoteName.value,
-                            modified: new Date().toISOString(),
+                            date_modified: new Date().toISOString(),
                             folderId: this.props.folderId,
                             content: event.target.newNote.value,
                         })
