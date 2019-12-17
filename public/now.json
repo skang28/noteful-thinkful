@@ -3,7 +3,13 @@
     "alias": "skang28-noteful-app",
     "name": "noteful-app",
     "routes": [
-        { "handle": "filesystem" },
-        { "src": "/.*", "dest": "/index.html" }
+      {
+        "src": "^/static/(.*)",
+        "dest": "/static/$1"
+      },
+      {
+        "src": ".*",
+        "dest": "/index.html"
+      }
     ]
   }
