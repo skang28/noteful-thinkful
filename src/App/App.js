@@ -41,13 +41,15 @@ class App extends Component {
     }
 
     handleDeleteNote = noteId => {
+        fetch(`${config.API_ENDPOINT}/api/note/${noteId}`, {
+            method: 'DELETE',
+        })
         this.setState({
             notes: this.state.notes.filter(note => note.id !== noteId)
         })
     }
 
     addFolder = (newFolder) => {
-        //
         let newFolders = this.state.folders
         fetch(`${config.API_ENDPOINT}/api/folders`, {
             method: 'POST',

@@ -17,11 +17,8 @@ export default class Note extends React.Component {
     e.preventDefault()
     const noteId = this.props.id
 
-    fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
+    fetch(`${config.API_ENDPOINT}/api/notes/${noteId}`, {
       method: 'DELETE',
-      headers: {
-        'content-type': 'appli'
-      }
     })
     .then(res => {
       if(!res.ok)
@@ -46,7 +43,7 @@ export default class Note extends React.Component {
             {name}
           </Link>
         </h2>
-        <button className='Note__delete' type='button'>
+        <button className='Note__delete' type='button' onClick={handleClickDelete}>
           <FontAwesomeIcon icon='trash-alt' />
           {' '}
           remove
