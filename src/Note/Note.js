@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { format } from 'date-fns'
+import { format, parseISO } from 'date-fns'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './Note.css'
 import NotesContext from '../NotesContext'
@@ -21,16 +21,13 @@ export default class Note extends React.Component {
       method: 'DELETE',
     })
     .then(res => {
-      console.log(res.ok)
       if(!res.ok)
         return res.json().then(e => Promise.reject(e))
         console.log(res.ok)
-      return res.json()
     })
     .then(() => {
       this.context.deleteNote(noteId)
       this.props.onDeleteNote(noteId)
-      console.log("function check")
     })
     .catch(error => {
       console.error({error})
@@ -56,7 +53,7 @@ export default class Note extends React.Component {
             Modified
             {' '}
             <span className='Date'>
-              {modified?format(new Date(modified), 'Do MMM yyyy'):'invalid data'}
+              {modified?format(parseISO(modified), "Do MMM yyyy"):'invalid data'}
             </span>
           </div>
         </div>

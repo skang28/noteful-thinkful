@@ -40,19 +40,10 @@ class App extends Component {
         })
     }
 
-    /*handleDeleteNote = noteId => {
+    handleDeleteNote = noteId => {
         this.setState({
             notes: this.state.notes.filter(note => note.id !== noteId)
         })
-    }*/
-
-    handleDeleteNote = noteId => {
-        const notes = this.state.notes.filter(note => note.id !== noteId);
-        console.log("notes", notes);
-        console.log(noteId);
-        this.setState({
-            notes
-        });
     }
 
     addFolder = (newFolder) => {
