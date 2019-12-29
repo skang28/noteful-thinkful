@@ -8,8 +8,10 @@ exports[`Note component renders a .Note by default 1`] = `
     className="Note__title"
   >
     <Link
-      to="/note/undefined"
-    />
+      to="/note/a"
+    >
+      test-class-name
+    </Link>
   </h2>
   <button
     className="Note__delete"
@@ -49,7 +51,7 @@ exports[`Note component renders a .Note by default 1`] = `
       <span
         className="Date"
       >
-        invalid data
+        15th Jan 2019
       </span>
     </div>
   </div>

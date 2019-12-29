@@ -53,7 +53,7 @@ export default class Note extends React.Component {
             Modified
             {' '}
             <span className='Date'>
-              {modified?format(parseISO(modified), "Do MMM yyyy"):'invalid data'}
+              {format(parseISO(modified), "Do MMM yyyy")}
             </span>
           </div>
         </div>
